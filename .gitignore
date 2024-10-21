@@ -1,8 +1,10 @@
 .git/
-.dockerignore
 backup*
 .env
 README.md
 *.pyc
 *.pyo
 *.pyd
+.venv
+env/
+__pycache__

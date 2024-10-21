@@ -1,10 +1,6 @@
 from fastapi import FastAPI
 from app.database import engine, Base
-#from app.models import models
-from .routers import karyawan, penilaian, leaderboard
-
-# Inisialisasi database
-#models.Base.metadata.create_all(bind=engine)
+from .routers import karyawan
 
 app = FastAPI(
     title="BRI HC Life",
@@ -14,7 +10,6 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup_event():
-    # Menampilkan pesan saat aplikasi mulai
     print("╭────────── FastAPI CLI - Development mode ───────────╮")
     print("│                                                     │")
     print(f"│  Serving at: http://127.0.0.1:8000                  │")
@@ -23,8 +18,7 @@ async def startup_event():
     print("│                                                     │")
     print("╰─────────────────────────────────────────────────────╯")
 
-app.include_router(karyawan.router, prefix="/api/v1/karyawan", tags=["Karyawan"])
-app.include_router(penilaian.router, prefix="/api/v1/penilaian", tags=["Penilaian"])
+app.include_router(karyawan.router)
 
 @app.get("/")
 def read_root():
