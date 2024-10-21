@@ -18,3 +18,10 @@ class Karyawan(BaseModel):
     class Config:
         orm_mode = True
 
+class KaryawanCreate(BaseModel):
+    nip: str
+    nama: str
+    divisi: DivisiEnum
+
+    class Config:
+        orm_mode = True
