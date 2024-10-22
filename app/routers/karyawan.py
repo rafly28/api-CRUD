@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app import crud, schemas, database
 from app.models import Karyawan
@@ -37,3 +37,20 @@ def delete_karyawan_by_nip(karyawan_nip: str, db: Session = Depends(database.get
     db.delete(karyawan)
     db.commit()
     return {"detail": f"Karyawan dengan NIP {karyawan_nip} berhasil dihapus."}
+
+#Update Karyawan
+@router.put("/karyawan/edit/{karyawan_nip}", response_model=schemas.Karyawan)
+def update_karyawan(karyawan_nip: str, update_data: schemas.UpdateKaryawan, db: Session = Depends(database.get_db)):
+    karyawan = db.query(Karyawan).filter(Karyawan.nip == karyawan_nip).first()
+    
+    if not karyawan:
+        raise HTTPException(status_code=404, detail="Karyawan not found")
+    
+    if update_data.nama is not None:
+        karyawan.nama = update_data.nama
+    if update_data.divisi is not None:
+        karyawan.divisi = update_data.divisi
+
+    db.commit()
+    db.refresh(karyawan)
+    return karyawan

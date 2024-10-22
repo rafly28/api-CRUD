@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Enum, TIMESTAMP
+from sqlalchemy import Column, String, Enum, TIMESTAMP, func
 from sqlalchemy.dialects.mysql import CHAR
 from app.database import Base
 import enum
@@ -16,5 +16,5 @@ class Karyawan(Base):
     nip = Column(String(10), index=True, nullable=False)
     nama = Column(String(255), index=True, nullable=False)
     divisi = Column(Enum(DivisiEnum), nullable=False)
-    created_at = Column(TIMESTAMP, nullable=True)
-    updated_at = Column(TIMESTAMP, nullable=True)
+    created_at = Column(TIMESTAMP, server_default=func.now())
+    updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())

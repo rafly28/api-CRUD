@@ -1,4 +1,3 @@
-backup*
 Dockerfile
 env/
 README.md
@@ -11,4 +10,4 @@ __pycache__
 .dockerignore
 docker-compose.yml
 .gitignore
-.venv
+.venv/

@@ -25,3 +25,10 @@ class KaryawanCreate(BaseModel):
 
     class Config:
         orm_mode = True
+
+class KaryawanUpdate(BaseModel):
+    nama: Optional[str]
+    divisi: Optional[DivisiEnum]
+
+    class Config:
+        orm_mode = True
