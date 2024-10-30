@@ -40,7 +40,7 @@ def delete_karyawan_by_nip(karyawan_nip: str, db: Session = Depends(database.get
 
 #Update Karyawan
 @router.put("/karyawan/edit/{karyawan_nip}", response_model=schemas.Karyawan)
-def update_karyawan(karyawan_nip: str, update_data: schemas.UpdateKaryawan, db: Session = Depends(database.get_db)):
+def update_karyawan(karyawan_nip: str, update_data: schemas.KaryawanUpdate, db: Session = Depends(database.get_db)):
     karyawan = db.query(Karyawan).filter(Karyawan.nip == karyawan_nip).first()
     
     if not karyawan:

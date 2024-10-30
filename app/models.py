@@ -16,5 +16,5 @@ class Karyawan(Base):
     nip = Column(String(10), index=True, nullable=False)
     nama = Column(String(255), index=True, nullable=False)
     divisi = Column(Enum(DivisiEnum), nullable=False)
-    created_at = Column(TIMESTAMP, server_default=func.now())
-    updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
+    created_at = Column(TIMESTAMP, server_default=func.now(), nullable=False)
+    updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now(), nullable=False)
